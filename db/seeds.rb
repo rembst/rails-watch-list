@@ -17,7 +17,7 @@ movies = JSON.parse(movies_serialized)['results']
 
 puts "Creating movies..."
 
-movies.first(10).each do |movie|
+movies.first(20).each do |movie|
   Movie.create!(
     title: movie['title'],
     overview: movie['overview'],
