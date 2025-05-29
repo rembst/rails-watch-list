@@ -1,0 +1,12 @@
+
+<div class="container">
+  <div class="d-flex flex-column justify-content-center align-items-center text-center">
+    <h1>Add a movie to the <%= @list.name %> list</h1>
+      <%= simple_form_for [@list, @bookmark] do |f| %>
+        <%= f.association :movie %>
+        <%= f.input :comment %>
+        <%= f.button :submit, "🎬 Add to #{@list.name}", class: "btn btn-primary mb-3" %>
+      <% end %>
+      <%= link_to "↩️ Back to #{@list.name}", list_path(@list), class: "btn btn-secondary" %>
+  </div>
+</div>

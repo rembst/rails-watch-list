@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="d-flex flex-column justify-content-center align-items-center text-center">
+
+<h1>Create your list</h1>
+<%= simple_form_for @list do |f| %>
+  <%= f.input :name %>
+  <%= f.submit "🧾 Add", class: "btn btn-primary mb-2" %>
+<% end %>
+<%= link_to "↩️ Back to index", lists_path, class: "btn btn-secondary" %>
+  </div>
+
+</div>
