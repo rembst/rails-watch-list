@@ -1,0 +1,31 @@
+.bookmark-new-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bookmark-new-title {
+  font-weight: bold;
+  font-size: 1.75rem;
+  color: #333;
+}
+
+.bookmark-new-form {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: 8px;
+  }
+
+  label {
+    font-weight: 500;
+  }
+}

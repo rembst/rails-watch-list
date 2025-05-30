@@ -1,12 +1,19 @@
+<div class="container my-5">
+  <div class="bookmark-new-wrapper d-flex flex-column justify-content-center align-items-center text-center">
+    <h1 class="bookmark-new-title mb-4">Add a movie to the <%= @list.name %> list</h1>
 
-<div class="container">
-  <div class="d-flex flex-column justify-content-center align-items-center text-center">
-    <h1>Add a movie to the <%= @list.name %> list</h1>
+    <div class="bookmark-new-form shadow p-4 rounded">
       <%= simple_form_for [@list, @bookmark] do |f| %>
-        <%= f.association :movie %>
-        <%= f.input :comment %>
-        <%= f.button :submit, "🎬 Add to #{@list.name}", class: "btn btn-primary mb-3" %>
+        <div class="mb-3">
+          <%= f.association :movie, label: "Choose a movie", input_html: { class: "form-select" } %>
+        </div>
+        <div class="mb-3">
+          <%= f.input :comment, input_html: { class: "form-control" }, label: "Your comment" %>
+        </div>
+        <%= f.button :submit, "🎬 Add to #{@list.name}", class: "btn btn-primary w-100 mb-3" %>
       <% end %>
-      <%= link_to "↩️ Back to #{@list.name}", list_path(@list), class: "btn btn-secondary" %>
+    </div>
+
+    <%= link_to "← Back to #{@list.name}", list_path(@list), class: "btn btn-outline-secondary mt-3" %>
   </div>
 </div>

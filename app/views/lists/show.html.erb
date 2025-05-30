@@ -1,36 +1,35 @@
-<div class="container">
-  <div class="d-flex flex-column justify-content-center align-items-center text-center">
+<!-- Container for movies -->
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0"><%= @list.name %></h1>
+    <div class="d-flex gap-2">
+      <%= link_to "← Back to all lists", lists_path, class: "btn btn-outline-secondary" %>
+      <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
     </div>
-      <h1><%= @list.name %></h1>
-      <%= link_to "↩🎬 Add a movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
-      <div class="row ">
-        <% @list.movies.each do |movie| %>
-        <div class="col-3 card mx-2 mb-2">
-            <h3><%= movie.title %> -- <%= movie.rating%>🌟</h3>
-            <img src=<%= movie.poster_url %> alt="movie poster">
-            <p> <%= movie.overview %></p>
-
-            <% @bookmarks.each do |bookmark|%>
-
-              <% if bookmark.movie_id == movie.id %>
-
-              <p><%= bookmark.comment %></p>
-
-              <div> <%= link_to "❌ delete",
-              bookmark_path(bookmark),
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
-              class: "btn btn-danger mb-3"
-              %></div>
-
-              <% end  %>
-
-            <% end  %>
-
-
-        </div>
-        <% end %>
-      </div>
-    <%= link_to "↩️ Back to index", lists_path, class: "btn btn-secondary" %>
   </div>
 
+  <div class="row">
+    <% @list.movies.each do |movie| %>
+      <% bookmark = @bookmarks.find { |b| b.movie_id == movie.id } %>
+      <div class="col-12 mb-4">
+        <div class="movie-card-show d-flex shadow-sm rounded overflow-hidden">
+          <div class="movie-poster-show">
+            <img src="<%= movie.poster_url %>" alt="movie poster">
+          </div>
+          <div class="movie-content-show p-4 d-flex flex-column">
+            <h5 class="fw-bold mb-2"><%= movie.title %> <span class="text-warning">• <%= movie.rating %> ⭐</span></h5>
+            <p class="text-muted mb-3"><%= movie.overview %></p>
+            <% if bookmark&.comment.present? %>
+              <p class="fst-italic mb-3">💬 <%= bookmark.comment %></p>
+            <% end %>
+            <div class="mt-auto">
+              <% if bookmark %>
+                <%= link_to "delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-danger fw-bold small" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

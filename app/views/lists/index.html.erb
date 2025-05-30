@@ -1,11 +1,31 @@
-<div class="container">
-  <div class="d-flex flex-column justify-content-center align-items-center text-center">
-    <h1>All your lists</h1>
-    <% @lists.each do | list | %>
-      <p><%= link_to list.name, list_path(list) %></p>
-    <% end %>
-    <%= link_to "🧾 Add a list", new_list_path, class: "btn btn-primary" %>
+<!-- Banner cinema -->
+<div class="banner">
+  <div class="banner-text">
+    <h1>🍿 Save any kind of movies 🎬</h1>
+  </div>
+</div>
 
+<!-- Container for lists -->
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Lists</h2>
+    <%= link_to "Create a movie list", new_list_path, class: "btn btn-success" %>
   </div>
 
+  <div class="row">
+    <% @lists.each do |list| %>
+      <% image_url = list.bookmarks.first&.movie&.poster_url || "placeholder.jpg" %>
+      <div class="col-md-4 mb-4">
+        <%= link_to list_path(list), class: "list-card d-block", style: "background-image: url(#{image_url});" do %>
+          <div class="list-card-title">
+            <%= list.name %>
+          </div>
+              <!-- Compteur -->
+          <div class="movie-count">
+            <%= pluralize(list.movies.count, "movie") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
